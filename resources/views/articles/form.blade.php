@@ -17,3 +17,9 @@
     {!! Form::textArea('small') !!}
 </div>
 {!! Form::submit($submitButtonText) !!}
+
+<script src="/js/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'small');
+    CKEDITOR.replace( 'content');
+</script>

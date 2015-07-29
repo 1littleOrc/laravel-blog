@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>{{ $page_title or "phpdreamer's blog" }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -21,36 +21,47 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
+</head>
+<body>
+<div class="wrapper">
 
 
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            {{ $page_title or "" }}
-          </h1>
+            <h1>
+                {{ $page_title or "" }}
+            </h1>
 
         </section>
 
         <!-- Main content -->
-        <section class="content">          
-          <!-- Your Page Content Here -->
-          @yield('content')
-        </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
+        <section class="content">
+            <!-- Your Page Content Here -->
+            @yield('content')
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 
 
+</div>
+<!-- ./wrapper -->
+<script src="/js/highlight.pack.js"></script>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet" href="/css/highlight/idea.css">
 
-    </div><!-- ./wrapper -->
+<script>
+    $(document).ready(function () {
+        $('pre code').each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
+    });</script>
+@yield('javascript')
 
-    @yield('javascript')
-
-  </body>
+</body>
 </html>
