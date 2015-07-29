@@ -42,10 +42,4 @@
         </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 
-    <style>
-        .main-sidebar, .sidebar-toggle{display: none}
-        .content-wrapper, .right-side, .main-footer{margin-left: 0}
-    </style>
-
-
 @endsection

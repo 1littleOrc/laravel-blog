@@ -51,7 +51,14 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        $article = Article::where('id', $id)->firstOrFail();
+        if ((string)$id == (string)(int)$id) {
+            $article = Article::where('id', $id)->firstOrFail();
+            if ($article->path)
+                return redirect(route('post', ['path' => $article->path]), 301);
+        } else {
+            $article = Article::where('path', $id)->firstOrFail();
+        }
+
         return view('articles.show', compact('article'));
     }
 

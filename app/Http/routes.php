@@ -11,9 +11,17 @@
 |
 */
 
-//Route::get('/', function () {return view('welcome');});
 
-Route::resource('articles', 'ArticlesController');
+Route::group(array('middleware' => 'auth'), function()
+{
+    Route::resource('articles', 'ArticlesController',
+        ['only' => ['create', 'store', 'update', 'destroy', 'edit']]);
+});
+
+
+Route::resource('articles', 'ArticlesController',
+    ['only' => ['index', 'show']]);
+
 Route::get('/', 'ArticlesController@index');
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -21,5 +29,11 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
+//Route::get('auth/register', 'Auth\AuthController@getRegister');
+//Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+// Posts
+Route::get('{id}', ['as' => 'post_by_id', 'uses' => 'ArticlesController@show'])
+    ->where(['id' => '[0-9]+']);
+Route::get('{path}.html', ['as' => 'post', 'uses' => 'ArticlesController@show'])
+    ->where(['path' => '.+']);
