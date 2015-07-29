@@ -20,7 +20,10 @@
         @endif
 
         {!! $article->small !!}
-        <div>Комментариев: {{ $article->comments }}</div>
+
+        <div>@if ($article->path) {!! link_to_route('post', 'Комментариев: ' . $article->comments, $article->path) !!}
+            @else{!! link_to_route('post_by_id', 'Комментариев: ' . $article->comments, $article->id) !!}
+            @endif </div>
     </article>
 
     <hr>

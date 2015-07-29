@@ -4,7 +4,7 @@
     <h1>{{ $article->title }}</h1>
     <div>{!! $article->content !!}</div>
 </article>
-{!! link_to_route('articles.index', 'Все статьи') !!}
+{!! link_to_route('main', 'Все статьи') !!}
 
 @if (Auth::check())
 <article>
@@ -14,5 +14,17 @@
     {!! Form::close() !!}
 </article>
 @endif
-
+<div id="comments">
+@foreach ($article->comments()->get() as $comment)
+    <div class="comment">
+        <div class="comment-author">
+            {{ $comment->username }}:
+            <div class="comment-date">{{ $comment->created_at }}</div>
+        </div>
+        <div class="comment-body">
+            {!! nl2br(e($comment->body))!!}
+        </div>
+    </div>
+@endforeach
+</div>
 @endsection

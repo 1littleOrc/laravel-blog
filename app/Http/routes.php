@@ -22,7 +22,7 @@ Route::group(array('middleware' => 'auth'), function()
 Route::resource('articles', 'ArticlesController',
     ['only' => ['index', 'show']]);
 
-Route::get('/', 'ArticlesController@index');
+Route::get('/', ['as' => 'main', 'uses' => 'ArticlesController@index']);
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
