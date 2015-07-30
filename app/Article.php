@@ -13,4 +13,9 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class, 'post_id');
     }
+
+    public function getDate()
+    {
+        return date('d.m.Y', strtotime($this->created_at));
+    }
 }

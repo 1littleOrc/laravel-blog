@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Http\Requests\StoreCommentRequest;
 use Illuminate\Http\Request;
 use App\Article;
 use App\Http\Requests;
@@ -17,7 +19,8 @@ class ArticlesController extends Controller
     public function index()
     {
         $articles = Article::orderBy('id', 'desc')->paginate();
-        return view('articles.index', compact('articles'));
+        $page_title = 'Блог веб разработчика: php, linux и другое';
+        return view('articles.index', compact('articles', 'page_title'));
     }
 
     /**
@@ -39,8 +42,8 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        Article::create($request->all());
-        return redirect('articles');
+        $article = Article::create($request->all());
+        return redirect(route('post', ['path' => $article->path]));
     }
 
     /**
@@ -51,15 +54,21 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        if ((string)$id == (string)(int)$id) {
-            $article = Article::where('id', $id)->firstOrFail();
-            if ($article->path)
-                return redirect(route('post', ['path' => $article->path]), 301);
-        } else {
-            $article = Article::where('path', $id)->firstOrFail();
-        }
+        $article = $this->article_by_path($id);
+        if ((string)$id == (string)(int)$id && $article->path)
+            return redirect(route('post', ['path' => $article->path]), 301);
 
-        return view('articles.show', compact('article'));
+        $page_title = $article->title;
+
+        return view('articles.show', compact('article', 'page_title'));
+    }
+
+    protected function article_by_path($id)
+    {
+        if ((string)$id == (string)(int)$id)
+            return Article::where('id', $id)->firstOrFail();
+        else
+            return Article::where('path', $id)->firstOrFail();
     }
 
     /**
@@ -85,7 +94,7 @@ class ArticlesController extends Controller
     {
         $article = Article::where('id', $id)->firstOrFail();
         $article->update($request->all());
-        return redirect('articles');
+        return redirect(route('post', ['path' => $article->path]));
 
     }
 
@@ -98,6 +107,30 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         Article::where('id', $id)->delete();
-        return redirect('articles');
+        return redirect('/');
+    }
+
+    public function store_comment(StoreCommentRequest $request, $id)
+    {
+        $this->article_by_path($id)->comments()->create([
+            'username' => $request->get('username'),
+            'body' => $request->get('body'),
+        ]);
+        return redirect($request->fullUrl());
+    }
+
+    public function delete_comment(Request $request)
+    {
+        return Comment::destroy($request->get('id'));
+    }
+
+    public function tag($tag)
+    {
+        $articles = Article::where('content', 'like', "%$tag%")
+            ->orWhere('title', 'like', "%$tag %")->orderBy('id', 'desc')->paginate();
+        $page_title = 'Блог веб разработчика: ' . $tag;
+        if (!$articles->count())
+            abort(404);
+        return view('articles.index', compact('articles', 'page_title'));
     }
 }

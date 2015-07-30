@@ -16,6 +16,9 @@ Route::group(array('middleware' => 'auth'), function()
 {
     Route::resource('articles', 'ArticlesController',
         ['only' => ['create', 'store', 'update', 'destroy', 'edit']]);
+
+    //delete comment
+    Route::post('delete.comment.ajax', 'ArticlesController@delete_comment');
 });
 
 
@@ -28,6 +31,9 @@ Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
+Route::get('tag/{tag}', ['as' => 'tag', 'uses' => 'ArticlesController@tag'])
+    ->where(['tag' => '.+']);
+
 // Registration routes...
 //Route::get('auth/register', 'Auth\AuthController@getRegister');
 //Route::post('auth/register', 'Auth\AuthController@postRegister');
@@ -37,3 +43,6 @@ Route::get('{id}', ['as' => 'post_by_id', 'uses' => 'ArticlesController@show'])
     ->where(['id' => '[0-9]+']);
 Route::get('{path}.html', ['as' => 'post', 'uses' => 'ArticlesController@show'])
     ->where(['path' => '.+']);
+//store comments
+Route::post('{id}', 'ArticlesController@store_comment')->where(['id' => '[0-9]+']);
+Route::post('{path}.html', 'ArticlesController@store_comment')->where(['path' => '.+']);

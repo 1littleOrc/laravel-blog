@@ -3,65 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ $page_title or "phpdreamer's blog" }}</title>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- Bootstrap 3.3.2
-    <link href="{{ asset("/bower_components/admin-lte/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
-    --><!-- Font Awesome Icons
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons
-    <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- Theme style
-    <link href="{{ asset("/bower_components/admin-lte/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-          page. However, you can choose any other skin. Make sure you
-          apply the skin class to the body tag so the changes take effect.
-
-    <link href="{{ asset("/bower_components/admin-lte/dist/css/skins/skin-blue.min.css")}}" rel="stylesheet" type="text/css" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+    <link rel="stylesheet" href="{{ asset("/css/style.min.css") }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="/images/my.ico" type="image/x-icon" />
 </head>
 <body>
-<div class="wrapper">
+<div class="container">
+    <header>
 
+        <a href="/"><img id="logo-img" src="/images/logo.png" alt="phpdreamer's blog">
+            <img src="https://avatars1.githubusercontent.com/u/3100053?v=3&s=150"
+                 alt="phpdreamer avatar" style="float: right;border-radius: 50% 0;">
+        </a>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                {{ $page_title or "" }}
-            </h1>
+    </header>
+    <div class="zerogrid">
+        <section class="row">
+            <div class="sidebar col12 offall">
 
+                <div class="heading">Теги</div>
+                <div class="content tags">
+                    <a href="/tag/php">PHP</a>,
+                    <a href="/tag/python">Python</a>,
+                    <a href="/tag/linux">Linux</a>,
+                    <a href="/tag/bash">Sape</a>,
+                    <a href="/tag/bash">Bash</a>,
+                    <a href="/tag/javascript">JavaScript</a>,
+                    <a href="/tag/jquery">jQuery</a>,
+                    <a href="/tag/html">HTML</a>,
+                    <a href="/tag/яндекс">Яндекс</a>,
+                    <a href="/tag/mysql">MySQL</a>,
+                    <a href="/tag/парсинг">парсинг</a>,
+                    <a href="/tag/vk">VK</a>,
+                    <a href="/tag/google">Google</a>,
+                    <a href="/tag/zend">Zend</a>
+                </div>
+
+            </div>
+            <div class="sidebar col04 offall" style="float: right">
+
+                <div class="heading">Контакты</div>
+                <div class="content">
+                    <ul class="list">
+                        <li>
+                            <a href="http://phpdreamer.ru/">Визитка</a>
+
+                        @if (Auth::check())
+
+                                | {!! link_to_route('articles.create', 'Новый пост') !!}
+                                | <a href="/auth/logout">Выход</a>
+
+                        @else
+                                <a href="/auth/login" title="Панель управления"
+                                   style="float: right;"><img title="Панель управления"
+                                                              src="/images/login.png"
+                                                              alt="Вход в панель управления"
+                                                              style="opacity:0.6;filter:alpha(opacity=60);"></a>
+
+                        @endif
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <!-- Your Page Content Here -->
-            @yield('content')
+        <section>
+            <div class="row block">
+                <div class="main-content col16">
+                    @yield('content')
+                </div>
+            </div>
         </section>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
-
 </div>
-<!-- ./wrapper -->
-<script src="/js/highlight.pack.js"></script>
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<link rel="stylesheet" href="/css/highlight/idea.css">
 
+<script src="{{ asset("/js/highlight.pack.js") }}"></script>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="{{ asset("/css/highlight/idea.css") }}">
 <script>
     $(document).ready(function () {
         $('pre code').each(function (i, block) {
             hljs.highlightBlock(block);
         });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     });</script>
 @yield('javascript')
 
+<div id="copyright">
+    <p>Copyright © 2015 - phpdreamer.ru</p>
+</div>
 </body>
 </html>

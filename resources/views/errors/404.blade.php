@@ -3,34 +3,31 @@
 @section('content')
 
     {{-- Setting $page_title - it is not a mistake --}}
-    @if ($page_title = 'Oops! 404 Page') @endif
-
-    <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    @if ($page_title = '404') @endif
 
     <style>
-        .container {
-            text-align: center;
-            display: table-cell;
-            vertical-align: middle;
-        }
-        .content {
+        .content404 {
             text-align: center;
             display: inline-block;
+            width: 100%;
         }
         .title {
             font-size: 72px;
+            line-height: 70px;
             margin: 0;
             padding: 0;
             width: 100%;
-            color: #B0BEC5;
-            display: table;
             font-weight: 100;
-            font-family: 'Lato', sans-serif;
+            background: rgba(0, 0, 0, 0.35);
+            color: #101010;
+            color: rgba(0,0,0,0.6);
+            text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
         }
     </style>
-    <div class="container">
-        <div class="content">
-            <div class="title">404 Not Found</div>
+
+        <div class="content404">
+            <div class="title"><br>404 <br>Не найдено<br><br></div>
+            <br>Вернитесь <a href="/">на главную</a>.
         </div>
-    </div>
+
 @endsection

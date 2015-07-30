@@ -11,6 +11,9 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-    mix.sass('app.scss');
+elixir(function (mix) {
+    mix.styles([
+        "zerogrid.css",
+        "style.css"
+    ], 'public/css/style.min.css');
 });

@@ -15,13 +15,13 @@ class CommentsServiceProvider extends ServiceProvider
     public function boot()
     {
         Comment::created(function ($comment) {
-            $article = $comment->article();
+            $article = $comment->article()->first();
             $article->comments += 1;
             $article->save();
         });
 
         Comment::deleting(function ($comment) {
-            $article = $comment->article();
+            $article = $comment->article()->first();
             $article->comments -= 1;
             $article->save();
         });
