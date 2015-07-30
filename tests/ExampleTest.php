@@ -14,6 +14,8 @@ class ExampleTest extends TestCase
     public function testBasicExample()
     {
         $this->visit('/')
-             ->see('Laravel 5');
+            ->see('Блог веб разработчика')
+            ->get('/articles/create')
+            ->assertRedirectedTo('/auth/login');
     }
 }
