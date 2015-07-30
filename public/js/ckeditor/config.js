@@ -38,4 +38,10 @@ CKEDITOR.editorConfig = function( config ) {
 
     config.removePlugins = 'codesnippetgeshi';
 
+	// Upload image url
+	config.filebrowserUploadUrl = '/image/store';
+
+	// disable Advanced Content Filter
+	config.allowedContent = true;
+
 };

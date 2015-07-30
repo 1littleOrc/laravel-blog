@@ -19,6 +19,9 @@ Route::group(array('middleware' => 'auth'), function()
 
     //delete comment
     Route::post('delete.comment.ajax', 'ArticlesController@delete_comment');
+
+    // upload image
+    Route::post('image/store', 'ImageController@store');
 });
 
 
