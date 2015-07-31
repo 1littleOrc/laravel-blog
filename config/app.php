@@ -146,6 +146,7 @@ return [
         App\Providers\CommentsServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
 
     ],
 

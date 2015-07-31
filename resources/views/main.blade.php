@@ -24,20 +24,9 @@
 
                 <div class="heading">Теги</div>
                 <div class="content tags">
-                    <a href="/tag/php">PHP</a>,
-                    <a href="/tag/python">Python</a>,
-                    <a href="/tag/linux">Linux</a>,
-                    <a href="/tag/bash">Sape</a>,
-                    <a href="/tag/bash">Bash</a>,
-                    <a href="/tag/javascript">JavaScript</a>,
-                    <a href="/tag/jquery">jQuery</a>,
-                    <a href="/tag/html">HTML</a>,
-                    <a href="/tag/яндекс">Яндекс</a>,
-                    <a href="/tag/mysql">MySQL</a>,
-                    <a href="/tag/парсинг">парсинг</a>,
-                    <a href="/tag/vk">VK</a>,
-                    <a href="/tag/google">Google</a>,
-                    <a href="/tag/zend">Zend</a>
+                    @foreach(config('sitemap.tags') as $tag => $label)
+                        {!! link_to_route('tag', $label, $tag) !!}
+                    @endforeach
                 </div>
 
             </div>

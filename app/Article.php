@@ -18,4 +18,11 @@ class Article extends Model
     {
         return date('d.m.Y', strtotime($this->created_at));
     }
+
+    public static function byTag($tag)
+    {
+        return self::where('content', 'like', "%$tag%")
+            ->orWhere('title', 'like', "%$tag %")
+            ->orderBy('id', 'desc');
+    }
 }

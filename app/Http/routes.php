@@ -28,6 +28,8 @@ Route::group(array('middleware' => 'auth'), function()
 Route::resource('articles', 'ArticlesController',
     ['only' => ['index', 'show']]);
 
+Route::get('sitemap.xml', 'SitemapController@index');
+
 Route::get('/', ['as' => 'main', 'uses' => 'ArticlesController@index']);
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.x-dev",
-        "greggilbert/recaptcha": "2.0.2"
+        "greggilbert/recaptcha": "2.0.2",
+        "roumen/sitemap": "v2.5.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -126,8 +126,7 @@ class ArticlesController extends Controller
 
     public function tag($tag)
     {
-        $articles = Article::where('content', 'like', "%$tag%")
-            ->orWhere('title', 'like', "%$tag %")->orderBy('id', 'desc')->paginate();
+        $articles = Article::byTag($tag)->paginate();
         $page_title = 'Блог веб разработчика: ' . $tag;
         if (!$articles->count())
             abort(404);
