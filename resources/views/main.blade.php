@@ -6,14 +6,14 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
     <link rel="stylesheet" href="{{ asset("/css/style.min.css") }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="/images/my.ico" type="image/x-icon" />
+    <link rel="icon" href="{{ asset("/images/my.ico") }}" type="image/x-icon" />
 </head>
 <body>
 <div class="container">
     <header>
 
-        <a href="/"><img id="logo-img" src="/images/logo.png" alt="phpdreamer's blog">
-            <img src="https://avatars1.githubusercontent.com/u/3100053?v=3&s=150"
+        <a href="/"><img id="logo-img" src="{{ asset("/images/logo.png") }}" alt="phpdreamer's blog">
+            <img src="{{ asset("/images/3100053.jpg") }}"
                  alt="phpdreamer avatar" style="float: right;border-radius: 50% 0;">
         </a>
 
@@ -39,14 +39,13 @@
                             <a href="http://phpdreamer.ru/">Визитка</a>
 
                         @if (Auth::check())
-
                                 | {!! link_to_route('articles.create', 'Новый пост') !!}
-                                | <a href="/auth/logout">Выход</a>
+                                | <a href="{{ URL::to('/auth/logout') }}">Выход</a>
 
                         @else
-                                <a href="/auth/login" title="Панель управления"
+                                <a href="{{ URL::to('/auth/login') }}" title="Панель управления"
                                    style="float: right;"><img title="Панель управления"
-                                                              src="/images/login.png"
+                                                              src="{{ asset("/images/login.png") }}"
                                                               alt="Вход в панель управления"
                                                               style="opacity:0.6;filter:alpha(opacity=60);"></a>
 

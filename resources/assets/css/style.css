@@ -215,7 +215,7 @@ header nav ul li:hover a {
 
 .sidebar .heading {
     margin: 0 auto;
-    background: #000000 url(/images/img04.gif);
+    background: #000000 url(/images/img04.png);
 }
 
 .sidebar section {
@@ -377,6 +377,12 @@ img {
 @media only screen and (max-width: 480px) {
     .menu {
         display: none;
+    }
+    .sidebar .tags a{
+        margin-right: 10px;
+    }
+    .main-content .pagination>li>a, .pagination>li>span{
+        margin-left: 10px;
     }
 }
 
