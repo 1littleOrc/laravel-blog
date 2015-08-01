@@ -8,13 +8,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset("/images/my.ico") }}" type="image/x-icon" />
 </head>
-<body>
+<body itemscope itemtype="http://schema.org/Blog">
 <div class="container">
     <header>
 
         <a href="/"><img id="logo-img" src="{{ asset("/images/logo.png") }}" alt="phpdreamer's blog">
             <img src="{{ asset("/images/3100053.jpg") }}"
-                 alt="phpdreamer avatar" style="float: right;border-radius: 50% 0;">
+                 itemprop="image"
+                 alt="phpdreamer" style="float: right;border-radius: 50% 0;">
         </a>
 
     </header>
@@ -23,7 +24,7 @@
             <div class="sidebar col12 offall">
 
                 <div class="heading">Теги</div>
-                <div class="content tags">
+                <div class="content tags" itemprop="keywords">
                     @foreach(config('sitemap.tags') as $tag => $label)
                         {!! link_to_route('tag', $label, $tag) !!}
                     @endforeach
@@ -66,8 +67,8 @@
     </div>
 </div>
 
-<script src="{{ asset("/js/highlight.pack.js") }}"></script>
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="{{ asset("/js/main.js") }}"></script>
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

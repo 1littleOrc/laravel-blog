@@ -10,8 +10,13 @@
                     @else{!! link_to_route('post_by_id', $article->title, $article->id) !!}
                     @endif
                 </h3>
-                <div class="date">{{ $article->getDate() }}</div>
 
+                <div class="stars">
+                    <div class="date">
+                        {{ $article->getDate() }}
+                    </div>
+                    @include('articles.rating', ['id' => $article->id, 'value' => $article->rating])
+                </div>
                 @if (Auth::check())
                     <div>
 
@@ -25,14 +30,15 @@
                 {!! $article->small !!}
 
                 <div>
-                    @if ($article->path) {!! link_to_route('post', 'Комментариев: ' . $article->comments, $article->path) !!}
+                    @if ($article->path) {!! link_to_route('post', $article->comments .' '
+                        . Lang::choice('комментарий|комментария|комментариев', $article->comments), $article->path) !!}
                     @else{!! link_to_route('post_by_id', 'Комментариев: ' . $article->comments, $article->id) !!}
                     @endif </div>
             </article>
 
         </div>
-        @endforeach
+    @endforeach
 
-<!-- pagination -->
+    <!-- pagination -->
     {!! $articles->render() !!}
 @endsection

@@ -164,6 +164,13 @@ header nav ul li:hover a {
     padding: 0 10px;
 }
 
+.stars .date, .stars .br-wrapper, .stars .rating-message {
+    display: inline-block;
+}
+
+.stars select {
+    display: none;
+}
 .main-content article {
     overflow: hidden;
     margin: 10px;

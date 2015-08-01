@@ -14,6 +14,13 @@ var elixir = require('laravel-elixir');
 elixir(function (mix) {
     mix.styles([
         "zerogrid.css",
-        "style.css"
+        "style.css",
+        "css-stars.css"
     ], 'public/css/style.min.css');
+    mix.scripts([
+        "highlight.pack.js",
+        "jquery-2.1.4.min.js",
+        "jquery.barrating.min.js",
+        "custom.js"
+    ], 'public/js/main.js');
 });

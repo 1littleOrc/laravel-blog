@@ -24,6 +24,8 @@ Route::group(array('middleware' => 'auth'), function()
     Route::post('image/store', 'ImageController@store');
 });
 
+// star rating - save new vote
+Route::post('vote.ajax', 'VoteController@store');
 
 Route::resource('articles', 'ArticlesController',
     ['only' => ['index', 'show']]);

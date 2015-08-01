@@ -14,13 +14,17 @@ class ArticlesController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $articles = Article::orderBy('id', 'desc')->paginate();
         $page_title = 'Блог веб разработчика: php, linux и другое';
-        return view('articles.index', compact('articles', 'page_title'));
+        return response()
+            ->view('articles.index', compact('articles', 'page_title'))
+            // forever cookie to identify user in star rating
+            ->withCookie($this->rating_cookie($request));
     }
 
     /**
@@ -52,7 +56,7 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $article = $this->article_by_path($id);
         if ((string)$id == (string)(int)$id && $article->path)
@@ -60,13 +64,16 @@ class ArticlesController extends Controller
 
         $page_title = $article->title;
 
-        return view('articles.show', compact('article', 'page_title'));
+        return response()
+            ->view('articles.show', compact('article', 'page_title'))
+            // forever cookie to identify user star rating
+            ->withCookie($this->rating_cookie($request));
     }
 
     protected function article_by_path($id)
     {
         if ((string)$id == (string)(int)$id)
-            return Article::where('id', $id)->firstOrFail();
+            return Article::findOrFail($id);
         else
             return Article::where('path', $id)->firstOrFail();
     }
@@ -124,12 +131,23 @@ class ArticlesController extends Controller
         return Comment::destroy($request->get('id'));
     }
 
-    public function tag($tag)
+    public function tag(Request $request, $tag)
     {
         $articles = Article::byTag($tag)->paginate();
         $page_title = 'Блог веб разработчика: ' . $tag;
         if (!$articles->count())
             abort(404);
-        return view('articles.index', compact('articles', 'page_title'));
+        return response()
+            ->view('articles.index', compact('articles', 'page_title'))
+            // forever cookie to identify user star rating
+            ->withCookie($this->rating_cookie($request));
+    }
+
+
+    protected function rating_cookie(Request $request){
+        $rid = $request->cookie('rid');
+        if(!$rid)
+            $rid = ip2long($_SERVER['REMOTE_ADDR']);
+        return cookie()->forever('rid', $rid);
     }
 }
