@@ -7,6 +7,17 @@
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
 
+
+/**
+ * Get the path to the public folder.
+ *
+ * @param  string  $path
+ * @return string
+ */
+function public_path($path = '')
+{
+    return realpath(__DIR__) . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+}
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
