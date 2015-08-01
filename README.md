@@ -3,11 +3,13 @@ Simple blog CMS on Laravel 5.1
 
 ### Functionality ###
 
-* blog
-* tags
-* comments
-* XML SiteMap
+* blog with human readable urls
+* comments with reCAPTCHA and email notifications
 * image uploading
+* microformats
+* static tags
+* star rating
+* XML SiteMap
 
 ### Requirements ###
 
@@ -35,3 +37,7 @@ You can create database schema via command:
 ```
 php artisan migrate
 ```
+
+### TODO: ###
+
+* infinite scrolling

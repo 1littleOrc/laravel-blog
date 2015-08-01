@@ -42,4 +42,11 @@ class Article extends Model
             ->orWhere('title', 'like', "%$tag %")
             ->orderBy('id', 'desc');
     }
+
+    public function getURL()
+    {
+        if ($this->path)
+            return route('post', $this->path);
+        return route('post_by_id', $this->id);
+    }
 }

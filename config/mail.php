@@ -54,7 +54,10 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => [
+        'address' => env('MAIL_ADMIN'),
+        'name' => isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : env('APP_URL', 'localhost')
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -119,6 +122,6 @@ return [
     |
     */
 
-    'pretend' => false,
+    'pretend' => env('MAIL_PRETEND', false),
 
 ];

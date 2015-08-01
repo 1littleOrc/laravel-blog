@@ -119,10 +119,11 @@ class ArticlesController extends Controller
 
     public function store_comment(StoreCommentRequest $request, $id)
     {
-        $this->article_by_path($id)->comments()->create([
+        $article = $this->article_by_path($id);
+        $article->comments()->create([
             'username' => $request->get('username'),
             'body' => $request->get('body'),
-        ]);
+        ])->notify_admin($article);
         return redirect($request->fullUrl());
     }
 
