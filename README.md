@@ -5,6 +5,7 @@ Simple blog CMS on Laravel 5.1
 
 * blog with human readable urls
 * comments with reCAPTCHA and email notifications
+* infinite scrolling
 * image uploading
 * microformats
 * static tags
@@ -37,7 +38,3 @@ You can create database schema via command:
 ```
 php artisan migrate
 ```
-
-### TODO: ###
-
-* infinite scrolling

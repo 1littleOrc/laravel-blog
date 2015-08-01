@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('content')
-
+    <div class="articles">
     @foreach ($articles as $article)
         <div class="row">
             <article>
@@ -41,4 +41,5 @@
 
     <!-- pagination -->
     {!! $articles->render() !!}
+    </div>
 @endsection

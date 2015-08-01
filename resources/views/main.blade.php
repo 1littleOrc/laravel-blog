@@ -66,8 +66,11 @@
         </section>
     </div>
 </div>
-
+@if (Agent::isMobile())
+<script src="{{ asset("/js/main.mobile.js") }}"></script>
+@else
 <script src="{{ asset("/js/main.js") }}"></script>
+@endif
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>

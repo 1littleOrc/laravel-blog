@@ -17,10 +17,23 @@ elixir(function (mix) {
         "style.css",
         "css-stars.css"
     ], 'public/css/style.min.css');
+
+    // desctop version of scripts
     mix.scripts([
         "highlight.pack.js",
-        "jquery-2.1.4.min.js",
+        "../../../bower_components/jquery/dist/jquery.js",
+        "jquery.barrating.min.js",
+        "../../../bower_components/jscroll/jquery.jscroll.js",
+        "custom.js",
+        "infinite.scrolling.js"
+    ], 'public/js/main.js');
+
+    //mobile version of scripts
+    mix.scripts([
+        "highlight.pack.js",
+        "../../../bower_components/jquery/dist/jquery.js",
         "jquery.barrating.min.js",
         "custom.js"
-    ], 'public/js/main.js');
+    ], 'public/js/main.mobile.js');
+
 });
