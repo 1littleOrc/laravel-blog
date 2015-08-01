@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ $page_title or "phpdreamer's blog" }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
-    <link rel="stylesheet" href="{{ asset("/css/style.min.css") }}">
+    <link rel="stylesheet" href="{{ elixir("css/all.css") }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset("/images/my.ico") }}" type="image/x-icon" />
 </head>
@@ -67,9 +67,9 @@
     </div>
 </div>
 @if (Agent::isMobile())
-<script src="{{ asset("/js/main.mobile.js") }}"></script>
+<script src="{{ elixir("js/main.mobile.js") }}"></script>
 @else
-<script src="{{ asset("/js/main.js") }}"></script>
+<script src="{{ elixir("js/main.js") }}"></script>
 @endif
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -78,7 +78,7 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 
-<link rel="stylesheet" href="{{ asset("/css/highlight/idea.css") }}">
+<link rel="stylesheet" href="{{ asset("/css/highlight/idea.css") }}" property="">
 <script>
     $(document).ready(function () {
         $('pre code').each(function (i, block) {

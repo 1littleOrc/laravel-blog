@@ -16,7 +16,7 @@ elixir(function (mix) {
         "zerogrid.css",
         "style.css",
         "css-stars.css"
-    ], 'public/css/style.min.css');
+    ], 'public/css/all.css');
 
     // desctop version of scripts
     mix.scripts([
@@ -36,4 +36,5 @@ elixir(function (mix) {
         "custom.js"
     ], 'public/js/main.mobile.js');
 
+    mix.version(["css/all.css", "js/main.js", "js/main.mobile.js"]);
 });

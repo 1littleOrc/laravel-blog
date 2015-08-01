@@ -8,7 +8,7 @@
         @endif
     </div>
     <select name="rating_{{ $id }}" class="rating">
-        <option @if ($value == 0) selected @endif value=""></option>
+        <option @if ($value == 0) selected @endif value="">-</option>
         @for ($v=1; $v<=5; $v++)
             <option @if ($value == $v) selected @if (isset($ratingCount) && $ratingCount) itemprop="ratingValue" @endif
                     @endif value="{{ $v }}">{{ $v }}

@@ -21,8 +21,9 @@ class ArticlesController extends Controller
     {
         $articles = Article::orderBy('id', 'desc')->paginate();
         $page_title = 'Блог веб разработчика: php, linux и другое';
+        $view = $request->ajax() ? 'articles.index-content' : 'articles.index';
         return response()
-            ->view('articles.index', compact('articles', 'page_title'))
+            ->view($view, compact('articles', 'page_title'))
             // forever cookie to identify user in star rating
             ->withCookie($this->rating_cookie($request));
     }
@@ -136,10 +137,11 @@ class ArticlesController extends Controller
     {
         $articles = Article::byTag($tag)->paginate();
         $page_title = 'Блог веб разработчика: ' . $tag;
+        $view = $request->ajax() ? 'articles.index-content' : 'articles.index';
         if (!$articles->count())
             abort(404);
         return response()
-            ->view('articles.index', compact('articles', 'page_title'))
+            ->view($view, compact('articles', 'page_title'))
             // forever cookie to identify user star rating
             ->withCookie($this->rating_cookie($request));
     }
