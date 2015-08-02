@@ -1,4 +1,3 @@
 User-agent: *
-Disallow:
-/auth/
-/articles/
+Disallow: /auth/
+Disallow: /articles/
