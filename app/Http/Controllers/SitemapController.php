@@ -35,7 +35,7 @@ class SitemapController extends Controller
                 $pages = ceil(Article::byTag($tag)->count() / $perPage);
                 if ($pages > 1)
                     for ($page = 2; $page <= $pages; $page++)
-                        $sitemap->add("$url?page=$page", date('c', time()), '0.7', 'weekly');
+                        $sitemap->add("$url/page/$page", date('c', time()), '0.7', 'weekly');
             }
             // all posts
             $posts = Article::all();
@@ -52,7 +52,7 @@ class SitemapController extends Controller
             $pages = ceil(count($posts) / $perPage);
             if ($pages > 1)
                 for ($page = 2; $page <= $pages; $page++)
-                    $sitemap->add("$home?page=$page", date('c', time()), '0.8', 'daily');
+                    $sitemap->add("$home/page/$page", date('c', time()), '0.8', 'daily');
         }
         return $sitemap->render('xml');
     }

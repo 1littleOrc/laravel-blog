@@ -32,14 +32,19 @@ Route::resource('articles', 'ArticlesController',
 
 Route::get('sitemap.xml', 'SitemapController@index');
 
-Route::get('/', ['as' => 'main', 'uses' => 'ArticlesController@index']);
+Route::get('/', ['as' => 'main_page', 'uses' => 'ArticlesController@index']);
+Route::get('/page/{page}', ['as' => 'main', 'uses' => 'ArticlesController@index'])
+    ->where(['page' => '\d+']);
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Route::get('tag/{tag}', ['as' => 'tag', 'uses' => 'ArticlesController@tag'])
-    ->where(['tag' => '.+']);
+    ->where(['tag' => '[^/]+']);
+Route::get('tag/{tag}/page/{page}', ['as' => 'tag_paged', 'uses' => 'ArticlesController@tag'])
+    ->where(['tag' => '[^/]+', 'page' => '\d+']);
 
 // Registration routes...
 //Route::get('auth/register', 'Auth\AuthController@getRegister');

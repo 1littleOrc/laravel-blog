@@ -44,5 +44,5 @@
 @endforeach
 
 <!-- pagination -->
-{!! $articles->render() !!}
+{!! $pagination_view !!}
 </div>
