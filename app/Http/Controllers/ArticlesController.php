@@ -45,7 +45,7 @@ class ArticlesController extends Controller
         // ajax infinite scrolling or full html page
         $view = $request->ajax() ? 'articles.index-content' : 'articles.index';
         return response()
-            ->view($view, compact('articles', 'page_title', 'pagination_view'))
+            ->view($view, compact('articles', 'page_title', 'pagination_view', 'page'))
             // forever cookie to identify user in star rating
             ->withCookie($this->rating_cookie($request));
     }
@@ -180,8 +180,19 @@ class ArticlesController extends Controller
         $view = $request->ajax() ? 'articles.index-content' : 'articles.index';
         if (!$articles->count())
             abort(404);
+
+        // image for og meta
+        $tag_image = url('/images/logo.png');
+        foreach ($articles as $article) {
+            $found_image = $article->getImageUrl();
+            if ($found_image != $tag_image) {
+                $tag_image = $found_image;
+                break;
+            }
+        }
+
         return response()
-            ->view($view, compact('articles', 'page_title', 'pagination_view'))
+            ->view($view, compact('articles', 'page_title', 'pagination_view', 'page', 'tag', 'tag_image'))
             // forever cookie to identify user star rating
             ->withCookie($this->rating_cookie($request));
     }

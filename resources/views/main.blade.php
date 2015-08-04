@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ elixir("css/all.css") }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset("/images/my.ico") }}" type="image/x-icon" />
+    @yield('head')
+
 </head>
 <body itemscope itemtype="http://schema.org/Blog">
 <div class="container">

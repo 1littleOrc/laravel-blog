@@ -91,3 +91,13 @@
         </script>
     @endif
 @endsection
+
+@section('head')
+
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="{{ Request::url() }}"/>
+    <meta property="og:title" content="{{ $article->title }}"/>
+    <meta property="og:image" content="{{ $article->getImageUrl() }}"/>
+    <meta property="og:description" content="{{ str_replace("\n", ' ', strip_tags($article->small)) }}"/>
+
+@endsection
