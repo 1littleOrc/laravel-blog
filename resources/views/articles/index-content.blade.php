@@ -27,10 +27,17 @@
             {!! $article->small !!}
 
             <div>
-                @if ($article->path) {!! link_to_route('post', $article->comments .' '
+                @if ($article->path)
+                    @if ($article->comments)
+                        {!! link_to_route('post', $article->comments .' '
                     . Lang::choice('комментарий|комментария|комментариев', $article->comments), $article->path) !!}
-                @else{!! link_to_route('post_by_id', 'Комментариев: ' . $article->comments, $article->id) !!}
-                @endif </div>
+                    @else
+                        {!! link_to_route('post', 'Читать \ Обсудить', $article->path) !!}
+                    @endif
+                @else
+                    {!! link_to_route('post_by_id', 'Комментариев: ' . $article->comments, $article->id) !!}
+                @endif
+            </div>
         </article>
 
     </div>
