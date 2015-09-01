@@ -28,7 +28,7 @@ class ImageController extends Controller
         $filename = microtime(true) . '.' . $imageExtension;
         $imageUrl = '/images/uploads/' . $filename;
         $request->file('upload')->move(
-            base_path() . '/public/images/uploads/',
+            public_path() . '/images/uploads/',
             $filename
         );
         return '<script>window.parent.CKEDITOR.tools.callFunction("'
