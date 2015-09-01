@@ -38,3 +38,14 @@ elixir(function (mix) {
 
     mix.version(["css/all.css", "js/main.js", "js/main.mobile.js"]);
 });
+
+var replace = require('gulp-replace');
+var gulp = require('gulp');
+
+gulp.task('compress', function() {
+    return gulp.src('./storage/framework/views/*')
+        .pipe(replace(/\n/g, ' '))
+        .pipe(replace(/(\s){2,}/g, '$1'))
+        .pipe(gulp.dest('./storage/framework/views/'));
+
+});
