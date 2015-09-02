@@ -1,7 +1,7 @@
 
 <div>
     {!! Form::label('title', 'Заголовок:') !!}
-    {!! Form::text('title') !!}
+    {!! Form::text('title', null, ['class'=>'form-control', 'style'=>'width:300px']) !!}
 </div>
 <div>
     {!! Form::label('path', 'Адрес для ЧПУ:') !!}
