@@ -38,7 +38,7 @@ class Comment extends Model
         Mail::send('emails.new-comment', $view_data, function ($message) {
             $email = config('mail.from')['address'];
             $message->to($email)
-                ->subject('Новый комментарий в блоге')
+                ->subject('Новый комментарий в блоге (IP ' . $_SERVER['REMOTE_ADDR'] . ')')
                 ->from('no-replay@' . $_SERVER['SERVER_NAME'], $_SERVER['SERVER_NAME']);
         });
     }
